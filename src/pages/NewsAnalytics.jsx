@@ -24,7 +24,7 @@ ChartJS.register(
 );
 
 const NewsAnalytics = () => {
-  const { articles } = useOutletContext(); 
+  const { articles } = useOutletContext();
   const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
@@ -52,34 +52,64 @@ const NewsAnalytics = () => {
   }, [articles]);
 
   return (
-    <div className="p-4 sm:p-8 mt-28 dark:h-screen">
+    <div
+      className="p-4 mt-12 dark:bg-black dark:text-white max-h-max "
+    >
       {!chartData ? (
-          <ReactLoading  className="dark:bg-white rounded-full" type={"bubbles"} color={"black"} height={80} width={80} />
+        <div className="flex justify-center items-center">
+          <ReactLoading
+            className="dark:bg-white rounded-full"
+            type={"bubbles"}
+            color={"black"}
+            height={80}
+            width={80}
+          />
+        </div>
       ) : (
-        <div className="chart-container w-full">
-          <h3 className="text-xl dark: font-semibold mb-4">Article Trends by Author</h3>
-          <div className="w-full">
-            <Line
-              data={chartData}
-              options={{
-                responsive: true, 
-                maintainAspectRatio: false, 
-                plugins: {
-                  legend: {
-                    position: "top",
-                  },
-                },
-                scales: {
-                  x: {
-                    ticks: {
-                      autoSkip: true,
+        <div
+          className="chart-container mx-auto h-screen xs:h-10"
+        >
+          <Line
+            data={chartData}
+            options={{
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  position: "top",
+                  labels: {
+                    font: {
+                      size: 12,
                     },
                   },
                 },
-              }}
-              height={undefined}
-            />
-          </div>
+                title: {
+                  display: true,
+                  text: "Article Trends",
+                  font: {
+                    size: 16,
+                  },
+                },
+              },
+              scales: {
+                x: {
+                  ticks: {
+                    autoSkip: true,
+                    font: {
+                      size: 10, 
+                    },
+                  },
+                },
+                y: {
+                  ticks: {
+                    font: {
+                      size: 10, 
+                    },
+                  },
+                },
+              },
+            }}
+          />
         </div>
       )}
     </div>

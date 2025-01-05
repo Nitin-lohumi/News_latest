@@ -22,9 +22,7 @@ const PayoutDetails = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get(
-          "https://newsapi.org/v2/everything?q=apple&from=2025-01-03&to=2025-01-03&sortBy=popularity&apiKey=4481422b2ebb4f5a9373dcba3219cd68"
-        );
+        const response = await axios.get("https://saurav.tech/NewsAPI/everything/cnn.json");
         const articles = response.data.articles;
         const authorMap = {};
         articles.forEach((article) => {
@@ -43,7 +41,7 @@ const PayoutDetails = () => {
         setPayoutData(formattedData);
         setLoading(false);
       } catch (err) {
-        setError(err.message || "Failed to fetch data from NewsAPI.");
+        setError(err.message || "Failed to fetch data from the NewsAPI.");
         setLoading(false);
       }
     };
@@ -64,32 +62,49 @@ const PayoutDetails = () => {
     <>
       {loading ? (
         <div className="flex justify-center items-center h-screen">
-        <ReactLoading  className="dark:bg-white rounded-full" type={"spin"} color={"black"} height={80} width={80} />
+          <ReactLoading
+            className="dark:bg-white rounded-full"
+            type={"spin"}
+            color={"black"}
+            height={80}
+            width={80}
+          />
         </div>
       ) : (
-        <Box className="flex flex-col mt-16 payout  h-screen overflow-y-hidden payoutContainer dark:bg-black">
+        <Box className="flex flex-col mt-16 payout h-screen overflow-y-hidden payoutContainer dark:bg-black">
           <div className="overflow-y-auto">
             <TableContainer
               component={Paper}
-              className="h-full max-h-[calc(100vh-100px)] overflow-auto  dark:bg-black dark:text-white">
-              <Table className="min-w-full payouttable  dark:bg-black dark:text-white">
+              className="h-full max-h-[calc(100vh-100px)] overflow-auto dark:bg-black dark:text-white"
+            >
+              <Table className="min-w-full payouttable dark:bg-black dark:text-white">
                 <TableHead className="sticky top-0 z-10 bg-white border-b">
-                  <TableRow className="bg-gray-100  dark:bg-black dark:text-white">
-                    <TableCell className="border-b author dark:text-white"><strong>Author</strong></TableCell>
-                    <TableCell align="center" className="border-b artical dark:text-white"><strong>Articles</strong></TableCell>
-                    <TableCell align="center" className="border-b payoutRate dark:text-white"><strong>Payout Rate (₹/Article)</strong></TableCell>
-                    <TableCell align="center" className="border-b payoutRate dark:text-white"><strong>Total Payout (₹)</strong></TableCell>
+                  <TableRow className="bg-gray-100 dark:bg-black dark:text-white">
+                    <TableCell className="border-b author dark:text-white">
+                      <strong>Author</strong>
+                    </TableCell>
+                    <TableCell align="center" className="border-b artical dark:text-white">
+                      <strong>Articles</strong>
+                    </TableCell>
+                    <TableCell align="center" className="border-b payoutRate dark:text-white">
+                      <strong>Payout Rate (₹/Article)</strong>
+                    </TableCell>
+                    <TableCell align="center" className="border-b payoutRate dark:text-white">
+                      <strong>Total Payout (₹)</strong>
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {payoutData.map((row, index) => (
                     <TableRow key={index}>
-                      <TableCell className="authorcol dark:text-white" >{row.author}</TableCell>
-                      <TableCell className="articalCol dark:text-white" align="center">{row.articles}</TableCell>
+                      <TableCell className="authorcol dark:text-white">{row.author}</TableCell>
+                      <TableCell className="articalCol dark:text-white" align="center">
+                        {row.articles}
+                      </TableCell>
                       <TableCell align="center">
                         <TextField
                           type="number"
-                          className="payoutCol  dark:bg-gray-400 dark:rounded-lg"
+                          className="payoutCol dark:bg-gray-400 dark:rounded-lg"
                           value={row.payoutRate}
                           onChange={(e) => handlePayoutRateChange(index, e.target.value)}
                           size="small"
