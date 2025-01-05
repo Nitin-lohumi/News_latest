@@ -137,7 +137,6 @@ const Dashboard = () => {
                       <TextField
                         type="text"
                         name="search"
-                        label="Search News"
                         variant="outlined"
                         placeholder="Global Search"
                         className="rounded-xl w-full outline-none border-cyan-700  dark:bg-gray-200"
