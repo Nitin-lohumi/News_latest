@@ -58,7 +58,7 @@ const NewsAnalytics = () => {
       ) : (
         <div className="chart-container w-full">
           <h3 className="text-xl dark: font-semibold mb-4">Article Trends by Author</h3>
-          <div className="w-full" style={{ position: "relative", height: "400px" }}>
+          <div className="w-full">
             <Line
               data={chartData}
               options={{
