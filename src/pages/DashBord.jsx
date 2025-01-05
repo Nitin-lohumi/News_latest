@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom"; // Import Outlet to render child components
-import Header from "../component/header";
+import Header from "../component/Navbar";
 import ReactLoading from "react-loading";
 import axios from "axios";
 import {
